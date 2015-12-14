@@ -1,0 +1,12 @@
+<%= form_for(@share_post) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <div class="field">
+    <%= f.text_field :title, placeholder: "Title" %>
+  </div>
+  <div class="field">
+    <%= f.text_area :comment, placeholder: "Compose new share post..." %>
+  </div>
+  <% @share_post.public_level = 0 %>
+  <%= f.hidden_field :public_level %>
+  <%= f.submit "Post", class: "btn btn-primary" %>
+<% end %>

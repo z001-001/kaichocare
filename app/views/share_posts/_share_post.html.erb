@@ -1,0 +1,13 @@
+<li id="share_post-<%= share_post.id %>">
+  <%= link_to gravatar_for(share_post.user, size: 50), share_post.user %>
+  <span class="user"><%= link_to share_post.user.username, share_post.user %></span>
+  <span class="title"><%= share_post.title %></span>
+  <span class="comment"><%= share_post.comment %></span>
+  <span class="timestamp">
+    Posted <%= time_ago_in_words(share_post.created_at) %> ago.
+    <% if current_user == share_post.user %>
+      <%= link_to "delete", share_post, method: :delete,
+                                       data: { confirm: "You sure?" } %>
+    <% end %>
+  </span>
+</li>

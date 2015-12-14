@@ -150,7 +150,7 @@ aside {
 
 /* microposts */
 
-.microposts {
+.share_posts {
   list-style: none;
   padding: 0;
   li {
@@ -161,7 +161,15 @@ aside {
     margin-top: 5em;
     padding-top: 0;
   }
-  .content {
+  .title {
+    display: block;
+    margin-left: 60px;
+    img {
+      display: block;
+      padding: 5px 0;
+    }
+  }
+  .comment {
     display: block;
     margin-left: 60px;
     img {
