@@ -5,10 +5,36 @@
         <%= gravatar_for @user %>
         <%= @user.username %>
       </h1>
+      <div>
+        <%#= link_to t(".followings"), followings_user_path %>
+        <%#= link_to t(".followers"), followers_user_path %>
+      </div>
+      <div class="description">
+        <%= @user.description %>
+      </div>
+      <% if @user.location.present? %>
+        <span class="location">
+          <%= "場所" %>: <%= @user.location %>
+        </span>
+      <% end %>
+      <% if @user.url.present? %>
+        <span>
+          <%= link_to "ホームページ", @user.url, target: "_blank" %>
+        </span>
+      <% end %>
     </section>
   </aside>
   <div class="col-md-8">
+    <%= link_to "Health Event 投稿", new_health_event_path %>
     <%= link_to "Share Post 投稿", new_share_post_path %>
+  </div>
+  <div class="col-md-8">
+    <% if @user.health_events.any? %>
+      <h3>Health events (<%= @user.health_events.count %>)</h3>
+      <ol class="health_events">
+        <%= render @health_events %>
+      </ol>
+    <% end %>
   </div>
   <div class="col-md-8">
     <% if @user.share_posts.any? %>
