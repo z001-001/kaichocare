@@ -1,6 +1,6 @@
-class CreateVowels < ActiveRecord::Migration
+class CreateBowels < ActiveRecord::Migration
   def change
-    create_table :vowels do |t|
+    create_table :bowels do |t|
       t.references :user, index: true, foreign_key: true
       t.integer :shape, null: false, default: 0
       t.string :color

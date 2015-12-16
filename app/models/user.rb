@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   validates :location, length: { maximum: 255 }
   validates :url, length: { maximum: 255 }
 
-  has_many :vowels
+  has_many :bowels
   has_many :health_events
   has_many :share_posts
 

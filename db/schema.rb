@@ -73,7 +73,7 @@ ActiveRecord::Schema.define(version: 20151213091356) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true
 
-  create_table "vowels", force: :cascade do |t|
+  create_table "bowels", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "shape",        default: 0, null: false
     t.string   "color"
@@ -86,7 +86,7 @@ ActiveRecord::Schema.define(version: 20151213091356) do
     t.datetime "updated_at",               null: false
   end
 
-  add_index "vowels", ["user_id", "occurred_at"], name: "index_vowels_on_user_id_and_occurred_at"
-  add_index "vowels", ["user_id"], name: "index_vowels_on_user_id"
+  add_index "bowels", ["user_id", "occurred_at"], name: "index_bowels_on_user_id_and_occurred_at"
+  add_index "bowels", ["user_id"], name: "index_bowels_on_user_id"
 
 end
