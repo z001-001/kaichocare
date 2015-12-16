@@ -1,0 +1,16 @@
+<li id="bowel-<%= bowel.id %>">
+  <%= link_to gravatar_for(bowel.user, size: 50), bowel.user %>
+  <span class="user"><%= link_to bowel.user.username, bowel.user %></span>
+  <span class="shape"><%= bowel.shape %></span>
+  <span class="color"><%= bowel.color %></span>
+  <span class="amount"><%= bowel.amount %></span>
+  <span class="comment"><%= bowel.comment %></span>
+  <span class="timestamp">
+    Occurred <%= time_ago_in_words(bowel.occurred_at) %> ago.
+    <% if current_user == bowel.user %>
+      <%= link_to "edit", edit_bowel_path(bowel) %>
+      <%= link_to "delete", bowel, method: :delete,
+                                       data: { confirm: "You sure?" } %>
+    <% end %>
+  </span>
+</li>

@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   resources :share_posts
   resources :health_events
+  resources :bowels
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

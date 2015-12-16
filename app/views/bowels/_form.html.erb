@@ -1,0 +1,43 @@
+<%= form_for(@bowel) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <div class="form-group">
+    <% Bowel.shapes.each do |key,val| %>
+      <%= f.radio_button :shape, key %>
+      <%= f.label "shape_#{key}", key, class: "control-label" %>
+    <% end %>
+  </div>
+  <div class="form-group">
+    <%= f.label :color, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.color_field :color %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :amount, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.select :amount,  { "large" => 5, "normal" => 3, "small" => 1 } %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :comment, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_area :comment, placeholder: "Compose new share post..." %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :feeling, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.select :feeling, ["(good)", "(bad)" ] %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :occurred_at, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%#= f.text_field :occurred_at, data: { :date_format => 'YYYY/MM/DD hh:mm' }, :class => 'form-control datetimepicker', placeholder: 'YYYY/MM/DD hh:mm' %>
+      <%= f.datetime_local_field :occurred_at, class: "form-control" %>
+    </div>
+  </div>
+  <% @bowel.public_level = 0 %>
+  <%= f.hidden_field :public_level %>
+  <%= f.submit "Post", class: "btn btn-primary" %>
+<% end %>
