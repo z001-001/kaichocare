@@ -4,6 +4,7 @@ class HealthEventsController < ApplicationController
 
   def new
     @health_event = current_user.health_events.build
+    @health_event.occurred_at = Time.now
   end
 
   def create

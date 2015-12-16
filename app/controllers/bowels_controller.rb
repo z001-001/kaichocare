@@ -4,7 +4,7 @@ class BowelsController < ApplicationController
 
   def new
     @bowel = current_user.bowels.build
-    @bowel.occurred_at = Date.today.to_time
+    @bowel.occurred_at = Time.now
   end
 
   def create
