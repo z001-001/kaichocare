@@ -35,6 +35,8 @@ module Kaichocare
       g.test_framework false
     end
 
+    config.action_view.embed_authenticity_token_in_remote_forms = true
+
     config.action_mailer.delivery_method = :smtp
       config.action_mailer.raise_delivery_errors = true
       config.action_mailer.smtp_settings = {

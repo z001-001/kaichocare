@@ -6,8 +6,8 @@
         <%= @user.username %>
       </h1>
       <div>
-        <%#= link_to t(".followings"), followings_user_path %>
-        <%#= link_to t(".followers"), followers_user_path %>
+        <%= link_to "Followings", followings_user_path %>
+        <%= link_to "Followers", followers_user_path %>
       </div>
       <div class="description">
         <%= @user.description %>
@@ -25,6 +25,7 @@
     </section>
   </aside>
   <div class="col-md-8">
+    <%= render 'follow_form' if user_signed_in? %>
     <%= link_to "Bowel Move 投稿", new_bowel_path %>
     <%= link_to "Health Event 投稿", new_health_event_path %>
     <%= link_to "Share Post 投稿", new_share_post_path %>

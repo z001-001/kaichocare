@@ -5,10 +5,15 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   resources :users, only: [:show]
+  resources :users do
+    get 'followings', on: :member
+    get 'followers', on: :member
+  end
 
   resources :share_posts
   resources :health_events
   resources :bowels
+  resources :relationships, only: [:create, :destroy]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -5,4 +5,18 @@ class UsersController < ApplicationController
     @health_events = @user.health_events.order(created_at: :desc)
     @bowels = @user.bowels.order(created_at: :desc)
   end
+
+  def followings
+    @title = "Followings"
+    @user = User.find(params[:id])
+    @users = @user.following_users
+    render 'followings_followers'
+  end
+
+  def followers
+    @title = "Followers"
+    @user = User.find(params[:id])
+    @users = @user.follower_users
+    render 'followings_followers'
+  end
 end
