@@ -7,9 +7,13 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   protected
-    def configure_permitted_parameters
-      devise_parameter_sanitizer.for(:sign_up) << :username
-    end
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.for(:sign_up) << :username
+    devise_parameter_sanitizer.for(:account_update) { |u|
+      u.permit(:email, :password, :password_confirmation, :current_password,
+               :username, :description, :location, :url,
+               :avatar, :avatar_cache, :remove_avatar) }
+  end
 
   private
   def set_mailer_host

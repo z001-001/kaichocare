@@ -1,5 +1,5 @@
 <li id="health_event-<%= health_event.id %>">
-  <%= link_to gravatar_for(health_event.user, size: 50), health_event.user %>
+  <%= link_to avatar_for(health_event.user, size: 50), health_event.user %>
   <span class="user"><%= link_to health_event.user.username, health_event.user %></span>
   <span class="title"><%= health_event.title %></span>
   <span class="comment"><%= health_event.comment %></span>

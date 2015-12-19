@@ -1,5 +1,5 @@
 <li id="bowel-<%= bowel.id %>">
-  <%= link_to gravatar_for(bowel.user, size: 50), bowel.user %>
+  <%= link_to avatar_for(bowel.user, size: 50), bowel.user %>
   <span class="user"><%= link_to bowel.user.username, bowel.user %></span>
   <span class="shape"><%= bowel.shape %></span>
   <span class="color"><%= bowel.color %></span>
