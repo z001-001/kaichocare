@@ -26,9 +26,11 @@
   </aside>
   <div class="col-md-8">
     <%= render 'follow_form' if user_signed_in? %>
-    <%= link_to "Bowel Move 投稿", new_bowel_path, class: "btn btn-large btn-primary" %>
-    <%= link_to "Health Event 投稿", new_health_event_path, class: "btn btn-large btn-primary" %>
-    <%= link_to "Share Post 投稿", new_share_post_path, class: "btn btn-large btn-primary" %>
+    <% if user_signed_in? && current_user == @user %>
+      <%= link_to "Bowel Move 投稿", new_bowel_path, class: "btn btn-large btn-primary" %>
+      <%= link_to "Health Event 投稿", new_health_event_path, class: "btn btn-large btn-primary" %>
+      <%= link_to "Share Post 投稿", new_share_post_path, class: "btn btn-large btn-primary" %>
+    <% end %>
   </div>
   <div class="col-md-8">
     <% if @user.bowels.any? %>
