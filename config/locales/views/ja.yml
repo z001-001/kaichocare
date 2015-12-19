@@ -10,7 +10,7 @@ ja:
       language: 言語
       log_out: ログアウト
       log_in: ログイン
-      sign_up: サインアップ
+      sign_up: 新規登録
   shared:
     error_messages:
       message: エラーが %{count} 個あります。

@@ -2,7 +2,7 @@
   <aside class="col-md-4">
     <section class="user_info">
       <h1>
-        <%= gravatar_for @user %>
+        <%= avatar_for @user %>
         <%= @user.username %>
       </h1>
     </section>
@@ -14,7 +14,7 @@
       <ol class="followings_followers">
         <% @users.each do |user| %>
           <li id="user-<%= user.id %>">
-            <%= link_to gravatar_for(user, size: 50), user %>
+            <%= link_to avatar_for(user, size: 50), user %>
             <span class="user"><%= link_to user.username, user %></span>
           </li>
         <% end %>

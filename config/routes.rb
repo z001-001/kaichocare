@@ -1,11 +1,10 @@
 Rails.application.routes.draw do
 
-  devise_for :users, controllers: { :omniauth_callbacks => "omniauth_callbacks" }
-
   root 'welcome#index'
 
-  resources :users, only: [:show]
-  resources :users do
+  devise_for :users, controllers: { :omniauth_callbacks => "omniauth_callbacks" }
+
+  resources :users, only: [:show] do
     get 'followings', on: :member
     get 'followers', on: :member
   end

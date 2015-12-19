@@ -6,8 +6,8 @@
         <%= @user.username %>
       </h1>
       <div>
-        <%= link_to "Followings", followings_user_path %>
-        <%= link_to "Followers", followers_user_path %>
+        <%= link_to "Followings", followings_user_path, class: "btn btn-xs btn-primary"  %>
+        <%= link_to "Followers", followers_user_path, class: "btn btn-xs btn-primary"  %>
       </div>
       <div class="description">
         <%= @user.description %>
@@ -26,27 +26,23 @@
   </aside>
   <div class="col-md-8">
     <%= render 'follow_form' if user_signed_in? %>
-    <%= link_to "Bowel Move 投稿", new_bowel_path %>
-    <%= link_to "Health Event 投稿", new_health_event_path %>
-    <%= link_to "Share Post 投稿", new_share_post_path %>
+    <%= link_to "Bowel Move 投稿", new_bowel_path, class: "btn btn-large btn-primary" %>
+    <%= link_to "Health Event 投稿", new_health_event_path, class: "btn btn-large btn-primary" %>
+    <%= link_to "Share Post 投稿", new_share_post_path, class: "btn btn-large btn-primary" %>
   </div>
   <div class="col-md-8">
     <% if @user.bowels.any? %>
       <h3>Bowel moves (<%= @user.bowels.count %>)</h3>
-      <ol class="bowels">
+      <ol class="share_posts">
         <%= render @bowels %>
       </ol>
     <% end %>
-  </div>
-  <div class="col-md-8">
     <% if @user.health_events.any? %>
       <h3>Health events (<%= @user.health_events.count %>)</h3>
-      <ol class="health_events">
+      <ol class="share_posts">
         <%= render @health_events %>
       </ol>
     <% end %>
-  </div>
-  <div class="col-md-8">
     <% if @user.share_posts.any? %>
       <h3>Share posts (<%= @user.share_posts.count %>)</h3>
       <ol class="share_posts">
