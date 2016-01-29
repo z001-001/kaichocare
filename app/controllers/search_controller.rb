@@ -6,31 +6,25 @@ class SearchController < ApplicationController
     if params[:q].present?
       @q = params[:q]
       @user = current_user
-      bowels = Bowel.where("(user_id in (?) AND public_level >= ?) OR " +
-                            "(user_id in (#{@user.friend_user_ids.join(',')}) AND public_level >= ?) OR " +
-                            "(user_id in (#{@user.following_user_ids.join(',')}) AND public_level >= ?)",
-                            @user.id, LEVEL_DEFAULT,
-                            LEVEL_FRIEND_SUMMARY,
-                            LEVEL_PUBLIC_SUMMARY)
-      bowels = bowels.where("comment LIKE ?", "%#{@q}%")
-      
-      health_events = HealthEvent.where("(user_id in (?) AND public_level >= ?) OR " +
-                            "(user_id in (#{@user.friend_user_ids.join(',')}) AND public_level >= ?) OR " +
-                            "(user_id in (#{@user.following_user_ids.join(',')}) AND public_level >= ?)",
-                            @user.id, LEVEL_DEFAULT,
-                            LEVEL_FRIEND_SUMMARY,
-                            LEVEL_PUBLIC_SUMMARY)
-      health_events = health_events.where("(title LIKE ?) OR (comment LIKE ?)",
-                            "%#{@q}%", "%#{@q}%")
 
-      share_posts = SharePost.where("(user_id in (?) AND public_level >= ?) OR " +
-                            "(user_id in (#{@user.friend_user_ids.join(',')}) AND public_level >= ?) OR " +
-                            "(public_level >= ?)",
-                            @user.id, LEVEL_DEFAULT,
-                            LEVEL_FRIEND_SUMMARY,
-                            LEVEL_PUBLIC_SUMMARY)
+      sql_str = "(user_id = #{@user.id} AND public_level >= #{LEVEL_DEFAULT}) " +
+        (@user.friend_user_ids.any? ?
+          " OR (user_id in (#{@user.friend_user_ids.join(',')}) AND public_level >= #{LEVEL_FRIEND_SUMMARY}) " :
+          "") +
+        (@user.following_user_ids.any? ?
+          " OR (user_id in (#{@user.following_user_ids.join(',')}) AND public_level >= #{LEVEL_PUBLIC_SUMMARY})" :
+          "")
+
+      bowels = Bowel.where(sql_str)
+      bowels = bowels.where("comment LIKE ?", "%#{@q}%").limit(50)
+
+      health_events = HealthEvent.where(sql_str)
+      health_events = health_events.where("(title LIKE ?) OR (comment LIKE ?)",
+                            "%#{@q}%", "%#{@q}%").limit(50)
+
+      share_posts = SharePost.where(sql_str)
       share_posts = share_posts.where("(title LIKE ?) OR (comment LIKE ?)",
-                            "%#{@q}%", "%#{@q}%")
+                            "%#{@q}%", "%#{@q}%").limit(50)
 
 
       result_array = bowels + health_events + share_posts
