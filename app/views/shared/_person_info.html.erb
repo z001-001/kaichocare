@@ -1,0 +1,9 @@
+          <li id="user-<%= info_user.id %>" class="list-group-item">
+            <%= link_to avatar_for(info_user, size: 50), info_user %>
+            <span class="user"><%= link_to info_user.username, info_user %></span>
+            <% if page_user.friend?(info_user) %>
+              <span class="label label-danger label-friend">
+                フレンド
+              </span>
+            <% end %>
+          </li>

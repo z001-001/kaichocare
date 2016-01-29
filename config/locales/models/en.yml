@@ -1,0 +1,51 @@
+en:
+  activerecord:
+    models:
+      user: User
+      bowel: Bowel
+      health_event: Health Event
+      share_post: Share Post
+    attributes:
+      user:
+        id: ID
+        username: User Name
+        email: E-mail
+        password: Password
+        password_confirmation: Password comfirmation
+        created_at: Created at
+        updated_at: Updated at
+        description: Profile
+        location: Locateion
+        url: Homepage
+        avatar: Avatar
+        bowel_public_level: Default Public Level of Bowels
+        health_event_public_level: Default Public Level of Health Events
+        share_post_public_level: Default Public Level of Share Posts
+      bowel:
+        user_id: User ID
+        shape: Shape
+        color: Color
+        amount: Amount
+        comment: Comment
+        feeling: Feeling
+        occurred_at: Occurred at
+        public_level: Public Level
+        created_at: Created at
+        updated_at: Updated at
+      health_event:
+        user_id: User ID
+        title: Title
+        comment: Comment
+        feeling: Feeling
+        occurred_at: Occurred at
+        ended_at: Ended at
+        public_level: Public Level
+        created_at: Created at
+        updated_at: Updated at
+      share_post:
+        user_id: User ID
+        title: Title
+        comment: Comment
+        public_level: Public Level
+        created_at: Created at
+        updated_at: Updated at

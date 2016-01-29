@@ -2,6 +2,8 @@ class Bowel < ActiveRecord::Base
   belongs_to :user
   validates :user_id, presence: true
   validates :shape, presence: true
+  validates :color, presence: true
+  validates :amount, presence: true
   validates :comment, length: { maximum: 140 }
   validates :occurred_at, presence: true
   validates :public_level, presence: true

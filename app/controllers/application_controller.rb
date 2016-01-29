@@ -12,9 +12,11 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:account_update) { |u|
       u.permit(:email, :password, :password_confirmation, :current_password,
                :username, :description, :location, :url,
-               :avatar, :avatar_cache, :remove_avatar) }
+               :avatar, :avatar_cache, :remove_avatar,
+               :bowel_public_level, :health_event_public_level,
+               :share_post_public_level) }
   end
-
+  
   private
   def set_mailer_host
     #ActionMailer::Base.default_url_options[:host] = request.host_with_port

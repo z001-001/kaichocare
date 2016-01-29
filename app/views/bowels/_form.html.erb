@@ -1,43 +1,340 @@
 <%= form_for(@bowel) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
+
   <div class="form-group">
-    <% Bowel.shapes.each do |key,val| %>
-      <%= f.radio_button :shape, key %>
-      <%= f.label "shape_#{key}", key, class: "control-label" %>
-    <% end %>
-  </div>
-  <div class="form-group">
-    <%= f.label :color, class: "col-sm-2 control-label" %>
-    <div class="col-sm-10">
-      <%= f.color_field :color %>
+    <%= f.label :shape %>
+    <div class="">
+      <label for="bowel_shape_hard_lumps">
+        <%= f.radio_button :shape, :hard_lumps %>
+        <%= image_tag "shape_1_hard_lumps.png", alt: "Hard lumps", style: "background-color: #c5902a;" %>
+        コロコロ便
+      </label>
+      <br />
+      <!--
+      <label for="bowel_shape_hard_lumps">
+        <input type="radio" value="hard_lumps" name="bowel[shape]" id="bowel_shape_hard_lumps" />
+        <img src="shape_1_hard_lumps.png" alt="Hard lumps" style="background-color: #c5902a;"  />
+        コロコロ便
+      </label>
+      -->
+      <label for="bowel_shape_lumpy">
+        <%= f.radio_button :shape, :lumpy %>
+        <%= image_tag "shape_2_lumpy.png", alt: "Lumpy", style: "background-color: #c5902a;" %>
+        硬い便
+      </label>
+      <br />
+      <!--
+      <label for="bowel_shape_lumpy">
+        <input type="radio" value="lumpy" name="bowel[shape]" id="bowel_shape_lumpy" />
+        <img src="shape_2_lumpy.png" alt="Lumpy" style="background-color: #c5902a;"  />
+        硬い便
+      </label>
+      -->
+      <label for="bowel_shape_cracky_sausage">
+        <%= f.radio_button :shape, :cracky_sausage %>
+        <%= image_tag "shape_3_cracky_sausage.png", alt: "Cracky sausage", style: "background-color: #c5902a;" %>
+        やや硬い便
+      </label>
+      <br />
+      <!--
+      <label for="bowel_shape_cracky_sausage">
+        <input type="radio" value="cracky_sausage" name="bowel[shape]" id="bowel_shape_cracky_sausage" />
+        <img src="shape_3_cracky_sausage.png" alt="Cracky sausage" style="background-color: #c5902a;"  />
+        やや硬い便
+      </label>
+      -->
+      <label for="bowel_shape_normal">
+        <%= f.radio_button :shape, :normal %>
+        <%= image_tag "shape_4_normal.png", alt: "Normal", style: "background-color: #c5902a;" %>
+        普通便
+      </label>
+      <br />
+      <!--
+      <label for="bowel_shape_normal">
+        <input type="radio" value="normal" name="bowel[shape]" id="bowel_shape_normal" />
+        <img src="shape_4_normal.png" alt="Normal" style="background-color: #c5902a;"  />
+        普通便
+      </label>
+      -->
+      <label for="bowel_shape_soft_blobs">
+        <%= f.radio_button :shape, :soft_blobs %>
+        <%= image_tag "shape_5_soft_blobs.png", alt: "Soft blobs", style: "background-color: #c5902a;" %>
+        やや軟便
+      </label>
+      <br />
+      <!--
+      <label for="bowel_shape_soft_blobs">
+        <input type="radio" value="soft_blobs" name="bowel[shape]" id="bowel_shape_soft_blobs" />
+        <img src="shape_5_soft_blobs.png" alt="Soft blobs" style="background-color: #c5902a;"  />
+        やや軟便
+      </label>
+      -->
+      <label for="bowel_shape_mushy">
+        <%= f.radio_button :shape, :mushy %>
+        <%= image_tag "shape_6_mushy.png", alt: "Mushy", style: "background-color: #c5902a;" %>
+        泥状便
+      </label>
+      <br />
+      <!--
+      <label for="bowel_shape_mushy">
+        <input type="radio" value="mushy" name="bowel[shape]" id="bowel_shape_mushy" />
+        <img src="shape_6_mushy.png" alt="Mushy"  style="background-color: #c5902a;" />
+        泥状便
+      </label>
+      -->
+      <label for="bowel_shape_liquid">
+        <%= f.radio_button :shape, :liquid %>
+        <%= image_tag "shape_7_liquid.png", alt: "Liquid", style: "background-color: #c5902a;" %>
+        水様便
+      </label>
+      <br />
+      <!--
+      <label for="bowel_shape_liquid">
+        <input type="radio" value="liquid" name="bowel[shape]" id="bowel_shape_liquid" />
+        <img src="shape_7_liquid.png" alt="Liquid"  style="background-color: #c5902a;" />
+        水様便
+      </label>
+      -->
+      <label for="bowel_shape_unknown">
+        <%= f.radio_button :shape, :unknown %>
+        <%= image_tag "shape_0_unknown.png", alt: "Unknown", style: "background-color: #c5902a;" %>
+        不明
+      </label>
+      <br />
+      <!--
+      <label for="bowel_shape_unknown">
+        <input type="radio" value="unknown" checked="checked" name="bowel[shape]" id="bowel_shape_unknown" />
+        <img src="shape_0_unknown.png" alt="Unknown"  style="background-color: #c5902a;" />
+        不明
+      </label>
+      -->
     </div>
   </div>
+
   <div class="form-group">
-    <%= f.label :amount, class: "col-sm-2 control-label" %>
-    <div class="col-sm-10">
-      <%= f.select :amount,  { "large" => 5, "normal" => 3, "small" => 1 } %>
+    <%= f.label :color %>
+    <div>
+      <label for="bowel_color_ead063">
+        <%= f.radio_button :color, "ead063" %>
+        <%= image_tag "color_stool.png", alt: "ead063", style: "background-color: #ead063;" %>
+      </label>
+      <br />
+      <!--
+      <label for="bowel_color_ead063">
+        <input type="radio" value="ead063" name="bowel[color]" id="bowel_color_ead063" />
+        <img src="color_stool.png" alt="ead063"  style="background-color: #ead063;" />
+      </label>
+      -->
+      <label for="bowel_color_d9b44c">
+        <%= f.radio_button :color, "d9b44c" %>
+        <%= image_tag "color_stool.png", alt: "d9b44c", style: "background-color: #d9b44c;" %>
+      </label>
+      <br />
+      <!--
+      <label for="bowel_color_d9b44c">
+        <input type="radio" value="d9b44c" name="bowel[color]" id="bowel_color_d9b44c" />
+        <img src="color_stool.png" alt="d9b44c"  style="background-color: #d9b44c;" />
+      </label>
+      -->
+      <label for="bowel_color_b79234">
+        <%= f.radio_button :color, "b79234" %>
+        <%= image_tag "color_stool.png", alt: "b79234", style: "background-color: #b79234;" %>
+      </label>
+      <br />
+      <!--
+      <label for="bowel_color_b79234">
+        <input type="radio" value="b79234" name="bowel[color]" id="bowel_color_b79234" />
+        <img src="color_stool.png" alt="b79234"  style="background-color: #b79234;" />
+      </label>
+      -->
+      <label for="bowel_color_a67141">
+        <%= f.radio_button :color, "a67141" %>
+        <%= image_tag "color_stool.png", alt: "a67141", style: "background-color: #a67141;" %>
+      </label>
+      <br />
+      <!--
+      <label for="bowel_color_a67141">
+        <input type="radio" value="a67141" name="bowel[color]" id="bowel_color_a67141" />
+        <img src="color_stool.png" alt="a67141"  style="background-color: #a67141;" />
+      </label>
+      -->
+      <label for="bowel_color_63553e">
+        <%= f.radio_button :color, "63553e" %>
+        <%= image_tag "color_stool.png", alt: "63553e", style: "background-color: #63553e;" %>
+      </label>
+      <br />
+      <!--
+      <label for="bowel_color_63553e">
+        <input type="radio" value="63553e" name="bowel[color]" id="bowel_color_63553e" />
+        <img src="color_stool.png" alt="63553e"  style="background-color: #63553e;" />
+      </label>
+      -->
+      <label for="bowel_color_493c2c">
+        <%= f.radio_button :color, "493c2c" %>
+        <%= image_tag "color_stool.png", alt: "493c2c", style: "background-color: #493c2c;" %>
+      </label>
+      <br />
+      <!--
+      <label for="bowel_color_493c2c">
+        <input type="radio" value="493c2c" name="bowel[color]" id="bowel_color_493c2c" />
+        <img src="color_stool.png" alt="493c2c"  style="background-color: #493c2c;" />
+      </label>
+      -->
     </div>
   </div>
+
+<!--
   <div class="form-group">
-    <%= f.label :comment, class: "col-sm-2 control-label" %>
+    <%#= f.label :color, class: "col-sm-2 control-label" %>
     <div class="col-sm-10">
-      <%= f.text_area :comment, placeholder: "Compose new share post..." %>
+      <%#= f.color_field :color %>
     </div>
   </div>
+-->
+
   <div class="form-group">
-    <%= f.label :feeling, class: "col-sm-2 control-label" %>
-    <div class="col-sm-10">
-      <%= f.select :feeling, ["(good)", "(bad)" ] %>
+    <%= f.label :amount %>
+    <div>
+      <label for="bowel_amount_1">
+        <%= f.radio_button :amount, "1" %>
+        <%= image_tag "amount_1.png", alt: "少ない", style: "background-color: #c5902a;" %>
+        (片手未満)
+      </label>
+      <br />
+      <!--
+      <label for="bowel_amount_1">
+        <input type="radio" value="1" name="bowel[amount]" id="bowel_amount_1" />
+        <img src="amount_1.png" alt="1"  style="background-color: #c5902a;" />
+        (片手未満)
+      </label>
+      -->
+      <label for="bowel_amount_3">
+        <%= f.radio_button :amount, "3" %>
+        <%= image_tag "amount_3.png", alt: "中くらい", style: "background-color: #c5902a;" %>
+        (片手以上)
+      </label>
+      <br />
+      <!--
+      <label for="bowel_amount_3">
+        <input type="radio" value="3" name="bowel[amount]" id="bowel_amount_3" />
+        <img src="amount_3.png" alt="3"  style="background-color: #c5902a;" />
+        (片手以上)
+      </label>
+      -->
+      <label for="bowel_amount_5">
+        <%= f.radio_button :amount, "5" %>
+        <%= image_tag "amount_5.png", alt: "多い", style: "background-color: #c5902a;" %>
+        (両手以上)
+      </label>
+      <br />
+      <!--
+      <label for="bowel_amount_5">
+        <input type="radio" value="5" name="bowel[amount]" id="bowel_amount_5" />
+        <img src="amount_5.png" alt="5"  style="background-color: #c5902a;" />
+        (両手以上)
+      </label>
+      -->
     </div>
   </div>
+
+<!--
   <div class="form-group">
-    <%= f.label :occurred_at, class: "col-sm-2 control-label" %>
+    <%#= f.label :amount, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%#= f.select :amount,  { "large" => 5, "normal" => 3, "small" => 1 } %>
+    </div>
+  </div>
+-->
+
+  <div class="form-group">
+    <%= f.label :comment, class: "control-label" %>
+    <%= f.text_area :comment, placeholder: "コメント...", class: "form-control" %>
+  </div>
+
+<!--
+  <div class="form-group">
+    <%#= f.label :comment, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%#= f.text_area :comment, placeholder: "Compose new share post..." %>
+    </div>
+  </div>
+-->
+
+  <div class="form-group">
+    <%= f.label :feeling %>
+    <div>
+      <label for="bowel_feeling_1">
+        <%= f.radio_button :feeling, "1" %>
+        <%= image_tag "feeling_1.png", alt: "良好" %>
+      </label>
+      <!--
+      <label for="bowel_feeling_1">
+        <input type="radio" value="1" name="bowel[feeling]" id="bowel_feeling_1" />
+        <img src="feeling_1.png" alt="Good" />
+      </label>
+      -->
+      <label for="bowel_feeling_2">
+        <%= f.radio_button :feeling, "2" %>
+        <%= image_tag "feeling_2.png", alt: "まずます" %>
+      </label>
+      <!--
+      <label for="bowel_feeling_2">
+        <input type="radio" value="2" name="bowel[feeling]" id="bowel_feeling_2" />
+        <img src="feeling_2.png" alt="So-so" />
+      </label>
+      -->
+      <label for="bowel_feeling_3">
+        <%= f.radio_button :feeling, "3" %>
+        <%= image_tag "feeling_3.png", alt: "悪い" %>
+      </label>
+      <!--
+      <label for="bowel_feeling_3">
+        <input type="radio" value="3" name="bowel[feeling]" id="bowel_feeling_3" />
+        <img src="feeling_3.png" alt="Bad" />
+      </label>
+      -->
+    </div>
+  </div>
+
+<!--
+  <div class="form-group">
+    <%#= f.label :feeling, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%#= f.select :feeling, ["(good)", "(bad)" ] %>
+    </div>
+  </div>
+-->
+
+  <div class="form-group">
+    <%= f.label :occurred_at, class: "control-label" %>
+    <%= f.datetime_local_field :occurred_at, class: "form-control" %>
+  </div>
+
+<!--
+  <div class="form-group">
+    <%#= f.label :occurred_at, class: "col-sm-2 control-label" %>
     <div class="col-sm-10">
       <%#= f.text_field :occurred_at, data: { :date_format => 'YYYY/MM/DD hh:mm' }, :class => 'form-control datetimepicker', placeholder: 'YYYY/MM/DD hh:mm' %>
-      <%= f.datetime_local_field :occurred_at, class: "form-control" %>
+      <%#= f.datetime_local_field :occurred_at, class: "form-control" %>
     </div>
   </div>
-  <% @bowel.public_level = 0 %>
-  <%= f.hidden_field :public_level %>
-  <%= f.submit "Post", class: "btn btn-primary" %>
+-->
+
+  <div class="form-group">
+    <%= f.label :public_level, class: "control-label" %>
+    <%= f.select :public_level, public_level_list,
+        #[["既定値", 0], ["公開", 5], ["公開(概要)", 4], ["友達のみ", 3], ["友達のみ(概要)", 2], ["非公開", 1]],
+        class: "form-control" %>
+  </div>
+
+<!--
+  <%# @bowel.public_level = 0 %>
+  <%#= f.hidden_field :public_level %>
+-->
+
+  <div class="form-group actions">
+    <%= f.submit "送信", class: "btn btn-large btn-primary" %>
+  </div>
+  <%#= f.submit "Post", class: "btn btn-primary" %>
+
 <% end %>

@@ -1,53 +1,75 @@
 <div class="row">
   <aside class="col-md-4">
+    <%= render partial: 'shared/user_info', locals: { user: @user }  %>
+    <!--
     <section class="user_info">
-      <h1>
-        <%= avatar_for @user %>
-        <%= @user.username %>
-      </h1>
       <div>
-        <%= link_to "Followings", followings_user_path, class: "btn btn-xs btn-primary"  %>
-        <%= link_to "Followers", followers_user_path, class: "btn btn-xs btn-primary"  %>
+        <h1>
+          <%= avatar_for @user %>
+          <%= @user.username %>
+        </h1>
+        <div>
+          <%= link_to "フォロー", followings_user_path, class: "btn btn-xs btn-primary"  %>
+          <%= link_to "フォロワー", followers_user_path, class: "btn btn-xs btn-primary"  %>
+        </div>
+        <div class="description">
+          <%= @user.description %>
+        </div>
+        <% if @user.location.present? %>
+          <span class="location">
+            <%= "場所" %>: <%= @user.location %>
+          </span>
+        <% end %>
+        <% if @user.url.present? %>
+          <span>
+            <%= link_to "ホームページ", @user.url, target: "_blank" %>
+          </span>
+        <% end %>
       </div>
-      <div class="description">
-        <%= @user.description %>
-      </div>
-      <% if @user.location.present? %>
-        <span class="location">
-          <%= "場所" %>: <%= @user.location %>
-        </span>
-      <% end %>
-      <% if @user.url.present? %>
-        <span>
-          <%= link_to "ホームページ", @user.url, target: "_blank" %>
-        </span>
-      <% end %>
     </section>
+    -->
+    <h4>
+      <%= link_to "フレンド", friends_user_path %>
+    </h4>
+    <ul class="person_list list-group">
+      <% @friend_users.each do |info_user| %>
+        <%= render partial: 'shared/person_info', locals: { page_user: @user, info_user: info_user } %>
+      <% end %>
+    </ul>
   </aside>
   <div class="col-md-8">
     <%= render 'follow_form' if user_signed_in? %>
     <% if user_signed_in? && current_user == @user %>
-      <%= link_to "Bowel Move 投稿", new_bowel_path, class: "btn btn-large btn-primary" %>
-      <%= link_to "Health Event 投稿", new_health_event_path, class: "btn btn-large btn-primary" %>
-      <%= link_to "Share Post 投稿", new_share_post_path, class: "btn btn-large btn-primary" %>
+      <%= link_to "お通じの記録を書く", new_bowel_path, class: "btn btn-large btn-primary" %>
+      <%= link_to "体調の記録を書く", new_health_event_path, class: "btn btn-large btn-primary" %>
+      <%= link_to "記事を書く", new_share_post_path, class: "btn btn-large btn-primary" %>
     <% end %>
+  <!--
   </div>
   <div class="col-md-8">
-    <% if @user.bowels.any? %>
-      <h3>Bowel moves (<%= @user.bowels.count %>)</h3>
-      <ol class="share_posts">
-        <%= render @bowels %>
+  -->
+    <% if @feed_items.present? %>
+      <h3>
+        <%= link_to "お通じの記録", bowels_user_path %>
+        /
+        <%= link_to "体調の記録", health_events_user_path %>
+        (最新)
+      </h3>
+      <ol class="feed_list">
+        <% @feed_items.each do |item| %>
+          <% if item.is_a?(Bowel) %>
+            <%= render partial: 'bowels/bowel', locals: { bowel: item } %>
+          <% elsif item.is_a?(HealthEvent) %>
+            <%= render partial: 'health_events/health_event', locals: { health_event: item } %>
+          <% end %>
+        <% end %>
       </ol>
     <% end %>
-    <% if @user.health_events.any? %>
-      <h3>Health events (<%= @user.health_events.count %>)</h3>
-      <ol class="share_posts">
-        <%= render @health_events %>
-      </ol>
-    <% end %>
-    <% if @user.share_posts.any? %>
-      <h3>Share posts (<%= @user.share_posts.count %>)</h3>
-      <ol class="share_posts">
+    <% if @share_posts.present? %>
+      <h3>
+        <%= link_to "記事", share_posts_user_path %> (最新)
+      </h3>
+      <ol class="feed_list">
         <%= render @share_posts %>
       </ol>
     <% end %>

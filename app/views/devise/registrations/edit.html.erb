@@ -1,7 +1,7 @@
-<h1>設定</h1>
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
+    <h1>設定</h1>
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name),
                 html: { method: :put }) do |f| %>
       <%= devise_error_messages! %>
@@ -21,7 +21,9 @@
       <% end %>
 
       <div class="form-group">
-        <%= f.label :password, class: "control-label" %> <i>(leave blank if you don't want to change it)</i><br />
+        <%= f.label :password, class: "control-label" %>
+        <%#<i>(leave blank if you don't want to change it)</i><br /> %>
+        <i>(変更しない場合はそのままで)</i><br />
         <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
       </div>
 
@@ -32,13 +34,17 @@
 
       <div class="form-group">
         <%= f.label :avatar, class: "control-label" %>
-        <% if current_user.avatar.url.present? %>
-          <%= image_tag(current_user.avatar.url) %>
-          <%= f.label :remove_avatar %>
-          <%= f.check_box :remove_avatar %>
-        <% else %>
-          <%= image_tag("default-avatar.png") %>
-        <% end %>
+        <p class="form-control-static">
+          <% if current_user.avatar.url.present? %>
+            <%#= image_tag(current_user.avatar.url) %>
+            <%= avatar_for(current_user) %><br />
+            <%= f.label :remove_avatar do %>
+              <%= f.check_box :remove_avatar %> 画像削除
+            <% end %>
+          <% else %>
+            <%= image_tag("default-avatar.png") %>
+          <% end %>
+        </p>
         <%= f.file_field :avatar, class: "form-control" %>
         <%= f.hidden_field :avatar_cache %>
       </div>
@@ -59,7 +65,30 @@
       </div>
 
       <div class="form-group">
-        <%= f.label :current_password, class: "control-label" %> <i>(we need your current password to confirm your changes)</i><br />
+        <%= f.label :bowel_public_level, class: "control-label" %>
+        <%= f.select :bowel_public_level, public_level_list,
+              #[["公開", 5], ["公開(概要)", 4], ["友達のみ", 3], ["友達のみ(概要)", 2], ["非公開", 1]],
+              class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :health_event_public_level, class: "control-label" %>
+        <%= f.select :health_event_public_level, public_level_list,
+              #[["公開", 5], ["公開(概要)", 4], ["友達のみ", 3], ["友達のみ(概要)", 2], ["非公開", 1]],
+              class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :share_post_public_level, class: "control-label" %>
+        <%= f.select :share_post_public_level, public_level_list,
+              #[["公開", 5], ["公開(概要)", 4], ["友達のみ", 3], ["友達のみ(概要)", 2], ["非公開", 1]],
+              class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :current_password, "現在のパスワード", class: "control-label" %>
+        <%#<i>(we need your current password to confirm your changes)</i><br />%>
+        <i>(変更の確認のため、パスワードを入力してください)</i><br />
         <%= f.password_field :current_password, class: "form-control" %>
       </div>
 
@@ -70,12 +99,12 @@
   </div>
 </div>
 
-<h2>アカウントの削除</h2>
-
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <p>Unhappy? <%= button_to "削除", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-large btn-primary" %></p>
+    <h2>アカウントの削除</h2>
+
+    <p><%= button_to "削除", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-large btn-primary" %></p>
   </div>
 </div>
 
-<%= link_to "Back", :back %>
+<%= link_to "戻る", :back %>

@@ -2,13 +2,14 @@
   <%= link_to avatar_for(share_post.user, size: 50), share_post.user %>
   <span class="user"><%= link_to share_post.user.username, share_post.user %></span>
   <span class="title"><%= share_post.title %></span>
-  <span class="comment"><%= share_post.comment %></span>
+  <!-- <span class="comment"><%= share_post.comment %></span> -->
   <span class="timestamp">
-    Posted <%= time_ago_in_words(share_post.created_at) %> ago.
-    <% if current_user == share_post.user %>
-      <%= link_to "edit", edit_share_post_path(share_post) %>
-      <%= link_to "delete", share_post, method: :delete,
+    <%= time_ago_in_words(share_post.created_at) %>前
+    <%# if current_user == share_post.user %>
+      <%#= link_to "edit", edit_share_post_path(share_post) %>
+      <%#= link_to "delete", share_post, method: :delete,
                                        data: { confirm: "You sure?" } %>
-    <% end %>
+    <%# end %>
+    <%= link_to "詳細", share_post_path(share_post), class: "btn btn-xs btn-default" %>
   </span>
 </li>

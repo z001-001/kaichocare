@@ -10,6 +10,15 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree .
  *= require_self
+ *= require_tree .
  */
+
+@import url("//fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,700,700italic");
+$font-family-sans-serif: "Open Sans", "Helvetica Neue", Helvetica, Arial, Verdana, Roboto, "游ゴシック", "Yu Gothic", "游ゴシック体", "YuGothic", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif;
+
+$brand-primary: #711111;
+$body-bg: #fff9f6;
+
+@import "bootstrap-sprockets";
+@import "bootstrap";

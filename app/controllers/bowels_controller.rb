@@ -4,17 +4,24 @@ class BowelsController < ApplicationController
 
   def new
     @bowel = current_user.bowels.build
-    @bowel.occurred_at = Time.now
+    # 分単位の時刻
+    time_now = Time.zone.now
+    @bowel.occurred_at = time_now - time_now.sec
+    @bowel.public_level = current_user.bowel_public_level
   end
 
   def create
     @bowel = current_user.bowels.build(bowel_params)
     if @bowel.save
-      flash[:success] = "bowel created!"
+      flash[:success] = "記録しました"
       redirect_to current_user
     else
       render 'new'
     end
+  end
+
+  def show
+    @bowel = Bowel.find(params[:id])
   end
 
   def edit
@@ -22,9 +29,9 @@ class BowelsController < ApplicationController
 
   def update
     if @bowel.update(bowel_params)
-      # 保存に成功した場合はトップページにリダイレクト
-      flash[:success] = "bowel updated!"
-      redirect_to current_user
+      # 保存に成功した場合はshowにリダイレクト
+      flash[:success] = "更新しました"
+      redirect_to @bowel
     else
       # 保存に失敗した場合は編集画面へ戻す
       render 'edit'
@@ -35,7 +42,7 @@ class BowelsController < ApplicationController
     #@bowel = current_user.bowels.find_by(id: params[:id])
     return redirect_to root_url if @bowel.nil?
     @bowel.destroy
-    flash[:success] = "Bowel deleted"
+    flash[:success] = "削除しました"
     redirect_to request.referrer || root_url
   end
 

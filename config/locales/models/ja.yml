@@ -1,0 +1,51 @@
+ja:
+  activerecord:
+    models:
+      user: ユーザー
+      bowel: お通じの記録
+      health_event: 体調の記録
+      share_post: 記事
+    attributes:
+      user:
+        id: ID
+        username: ユーザ名
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: "パスワード(確認)"
+        created_at: 登録日時
+        updated_at: 更新日時
+        description: プロフィール
+        location: 場所
+        url: ホームページ
+        avatar: アバター
+        bowel_public_level: お通じの既定の公開設定
+        health_event_public_level: 体調記録の既定の公開設定
+        share_post_public_level: 記事の既定の公開設定
+      bowel:
+        user_id: ユーザーID
+        shape: 形状
+        color: 色
+        amount: 量
+        comment: コメント
+        feeling: 感じ
+        occurred_at: 時刻
+        public_level: 公開設定
+        created_at: 登録日時
+        updated_at: 更新日時
+      health_event:
+        user_id: ユーザーID
+        title: タイトル
+        comment: コメント
+        feeling: 感じ
+        occurred_at: 発生時刻
+        ended_at: 終了時刻
+        public_level: 公開設定
+        created_at: 登録日時
+        updated_at: 更新日時
+      share_post:
+        user_id: ユーザーID
+        title: タイトル
+        comment: 本文
+        public_level: 公開設定
+        created_at: 登録日時
+        updated_at: 更新日時

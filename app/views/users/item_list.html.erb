@@ -1,0 +1,37 @@
+<div class="row">
+  <aside class="col-md-4">
+    <%= render partial: 'shared/user_info', locals: { user: @user }  %>
+  </aside>
+  <div class="col-md-8">
+    <% if @bowels %>
+      <h3>
+        <%= link_to "お通じの記録", bowels_user_path %>
+      </h3>
+      <%= page_entries_info @bowels %>
+      <ol class="feed_list">
+        <%= render @bowels %>
+      </ol>
+      <%= paginate @bowels %>
+    <% end %>
+    <% if @health_events %>
+      <h3>
+        <%= link_to "体調の記録", health_events_user_path %>
+      </h3>
+      <%= page_entries_info @health_events %>
+      <ol class="feed_list">
+        <%= render @health_events %>
+      </ol>
+      <%= paginate @health_events %>
+    <% end %>
+    <% if @share_posts %>
+      <h3>
+        <%= link_to "記事", share_posts_user_path %>
+      </h3>
+      <%= page_entries_info @share_posts %>
+      <ol class="feed_list">
+        <%= render @share_posts %>
+      </ol>
+      <%= paginate @share_posts %>
+    <% end %>
+  </div>
+</div>

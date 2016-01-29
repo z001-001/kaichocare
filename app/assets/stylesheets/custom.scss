@@ -1,8 +1,14 @@
-@import "bootstrap-sprockets";
-@import "bootstrap";
+
+//@import url("//fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,700,700italic");
 
 /* universal */
-
+/*
+html,
+body {
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, Verdana, Roboto, "游ゴシック", "Yu Gothic", "游ゴシック体", "YuGothic", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif;
+}
+*/
+/*
 body {
   padding-top: 60px;
 }
@@ -25,6 +31,7 @@ textarea {
 
 /* typography */
 
+/*
 h1, h2, h3, h4, h5, h6 {
   line-height: 1;
 }
@@ -52,6 +59,7 @@ p {
 
 /* header */
 
+/*
 #logo {
   float: left;
   margin-right: 10px;
@@ -70,6 +78,7 @@ p {
 
 /* mixins, variables, etc. */
 
+/*
 $gray-medium-light: #eaeaea;
 
 @mixin box_sizing {
@@ -80,6 +89,7 @@ $gray-medium-light: #eaeaea;
 
 /* forms */
 
+/*
 input, textarea, select, .uneditable-input {
   border: 1px solid #bbb;
   width: 100%;
@@ -108,6 +118,7 @@ input {
 
 /* sidebar */
 
+/*
 aside {
   section.user_info {
     margin-top: 20px;
@@ -150,6 +161,7 @@ aside {
 
 /* microposts */
 
+/*
 .share_posts {
   list-style: none;
   padding: 0;
@@ -205,6 +217,7 @@ span.picture {
 
 /* followings followers */
 
+/*
 .followings_followers {
   list-style: none;
   padding: 0;
@@ -224,3 +237,4 @@ span.picture {
     margin-top: 5px;
   }
 }
+*/

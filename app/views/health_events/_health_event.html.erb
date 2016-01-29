@@ -1,14 +1,23 @@
-<li id="share_post-<%= health_event.id %>">
+<li id="health_event-<%= health_event.id %>">
   <%= link_to avatar_for(health_event.user, size: 50), health_event.user %>
   <span class="user"><%= link_to health_event.user.username, health_event.user %></span>
-  <span class="title"><%= health_event.title %></span>
-  <span class="comment"><%= health_event.comment %></span>
+  <span class="title">
+    <%= feeling_image_for(health_event) %>
+    <%= health_event.title %>
+  </span>
+  <!-- <span class="comment"><%= health_event.comment %></span> -->
   <span class="timestamp">
-    Occurred <%= time_ago_in_words(health_event.occurred_at) %> ago.
-    <% if current_user == health_event.user %>
-      <%= link_to "edit", edit_health_event_path(health_event) %>
-      <%= link_to "delete", health_event, method: :delete,
-                                       data: { confirm: "You sure?" } %>
+    <!-- <%= time_ago_in_words(health_event.occurred_at) %>前 -->
+    <%= health_event.occurred_at.to_s(:created_at) %>
+    <% if health_event.ended_at %>
+      - <%= health_event.ended_at.to_s(:created_at) %>
     <% end %>
+
+    <%# if current_user == health_event.user %>
+      <%#= link_to "edit", edit_health_event_path(health_event) %>
+      <%#= link_to "delete", health_event, method: :delete,
+                                       data: { confirm: "You sure?" } %>
+    <%# end %>
+    <%= link_to "詳細", health_event_path(health_event), class: "btn btn-xs btn-default" %>
   </span>
 </li>

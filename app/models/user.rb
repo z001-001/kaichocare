@@ -4,9 +4,9 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable,
+         :recoverable, :rememberable, :trackable, :validatable
          #:confirmable, :lockable, #:timeoutable,
-         :omniauthable, omniauth_providers: [:twitter]
+         #:omniauthable, omniauth_providers: [:twitter]
 
   validates :username, presence: true, length: { maximum: 50 }
   validates :description, length: { maximum: 255 }
@@ -17,15 +17,25 @@ class User < ActiveRecord::Base
   has_many :health_events
   has_many :share_posts
 
+  # フォロー関連
   has_many :following_relationships, class_name:  "Relationship",
                                      foreign_key: "follower_id",
                                      dependent:   :destroy
   has_many :following_users, through: :following_relationships, source: :followed
 
+  # フォロワー関連
   has_many :follower_relationships, class_name:  "Relationship",
                                     foreign_key: "followed_id",
                                     dependent:   :destroy
   has_many :follower_users, through: :follower_relationships, source: :follower
+
+  # フレンド関連
+  has_many :friend_relationships, -> { where friend: true },
+                                     class_name:  "Relationship",
+                                     foreign_key: "follower_id",
+                                     dependent:   :destroy
+
+  has_many :friend_users, through: :friend_relationships, source: :followed
 
 
   def self.from_omniauth(auth)
@@ -49,13 +59,27 @@ class User < ActiveRecord::Base
 
   # 他のユーザーをフォローする
   def follow(other_user)
-    following_relationships.find_or_create_by(followed_id: other_user.id)
+    mine = following_relationships.find_or_create_by(followed_id: other_user.id)
+    # フレンド設定、逆が存在したら
+    other = follower_relationships.find_by(follower_id: other_user.id)
+    if other
+      mine.friend = true
+      other.friend = true
+      mine.save
+      other.save
+    end
   end
 
   # フォローしているユーザーをアンフォローする
   def unfollow(other_user)
     following_relationship = following_relationships.find_by(followed_id: other_user.id)
     following_relationship.destroy if following_relationship
+    # フレンド解除、逆が存在したら
+    other = follower_relationships.find_by(follower_id: other_user.id)
+    if other
+      other.friend = nil
+      other.save
+    end
   end
 
   # あるユーザーをフォローしているかどうか？
@@ -63,4 +87,8 @@ class User < ActiveRecord::Base
     following_users.include?(other_user)
   end
 
+  # あるユーザーがフレンドになっているかどうか？
+  def friend?(other_user)
+    friend_users.include?(other_user)
+  end
 end

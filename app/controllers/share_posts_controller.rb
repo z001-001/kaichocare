@@ -4,16 +4,21 @@ class SharePostsController < ApplicationController
 
   def new
     @share_post = current_user.share_posts.build
+    @share_post.public_level = current_user.share_post_public_level
   end
 
   def create
     @share_post = current_user.share_posts.build(share_post_params)
     if @share_post.save
-      flash[:success] = "Share post created!"
+      flash[:success] = "投稿しました"
       redirect_to current_user
     else
       render 'new'
     end
+  end
+  
+  def show
+    @share_post = SharePost.find(params[:id])
   end
 
   def edit
@@ -21,9 +26,9 @@ class SharePostsController < ApplicationController
 
   def update
     if @share_post.update(share_post_params)
-      # 保存に成功した場合はトップページにリダイレクト
-      flash[:success] = "Share post updated!"
-      redirect_to current_user
+      # 保存に成功した場合はshowにリダイレクト
+      flash[:success] = "更新しました"
+      redirect_to @share_post
     else
       # 保存に失敗した場合は編集画面へ戻す
       render 'edit'
@@ -34,8 +39,8 @@ class SharePostsController < ApplicationController
     #@share_post = current_user.share_posts.find_by(id: params[:id])
     return redirect_to root_url if @share_post.nil?
     @share_post.destroy
-    flash[:success] = "Share post deleted"
-    redirect_to request.referrer || root_url
+    flash[:success] = "削除しました"
+    redirect_to current_user || root_url
   end
 
   private

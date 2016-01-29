@@ -4,17 +4,24 @@ class HealthEventsController < ApplicationController
 
   def new
     @health_event = current_user.health_events.build
-    @health_event.occurred_at = Time.now
+    # 分単位の時刻
+    time_now = Time.zone.now
+    @health_event.occurred_at = time_now - time_now.sec
+    @health_event.public_level = current_user.health_event_public_level
   end
 
   def create
     @health_event = current_user.health_events.build(health_event_params)
     if @health_event.save
-      flash[:success] = "Health event created!"
+      flash[:success] = "記録しました"
       redirect_to current_user
     else
       render 'new'
     end
+  end
+
+  def show
+    @health_event = HealthEvent.find(params[:id])
   end
 
   def edit
@@ -22,9 +29,9 @@ class HealthEventsController < ApplicationController
 
   def update
     if @health_event.update(health_event_params)
-      # 保存に成功した場合はトップページにリダイレクト
-      flash[:success] = "Health event updated!"
-      redirect_to current_user
+      # 保存に成功した場合はshowジにリダイレクト
+      flash[:success] = "更新しました"
+      redirect_to @health_event
     else
       # 保存に失敗した場合は編集画面へ戻す
       render 'edit'
@@ -35,7 +42,7 @@ class HealthEventsController < ApplicationController
     #@health_event = current_user.health_events.find_by(id: params[:id])
     return redirect_to root_url if @health_event.nil?
     @health_event.destroy
-    flash[:success] = "Health event deleted"
+    flash[:success] = "削除しました"
     redirect_to request.referrer || root_url
   end
 

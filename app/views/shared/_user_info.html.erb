@@ -1,4 +1,31 @@
+<!--
 <%= link_to avatar_for(current_user, size: 50), current_user %>
 <h1><%= current_user.username %></h1>
 <span><%= link_to "view my profile", current_user %></span>
 <span><%= pluralize(current_user.share_posts.count, "Share Post") %></span>
+-->
+    <section class="user_info">
+      <div>
+        <h1>
+          <%= avatar_for user %>
+          <%= link_to user.username, user %>
+        </h1>
+        <div>
+          <%= link_to "フォロー", followings_user_path(user), class: "btn btn-xs btn-primary"  %>
+          <%= link_to "フォロワー", followers_user_path(user), class: "btn btn-xs btn-primary"  %>
+        </div>
+        <div class="description">
+          <%= user.description %>
+        </div>
+        <% if user.location.present? %>
+          <span class="location">
+            <%= "場所" %>: <%= user.location %>
+          </span>
+        <% end %>
+        <% if user.url.present? %>
+          <span>
+            <%= link_to "ホームページ", user.url, target: "_blank" %>
+          </span>
+        <% end %>
+      </div>
+    </section>

@@ -2,16 +2,20 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
 
-  devise_for :users, controllers: { :omniauth_callbacks => "omniauth_callbacks" }
+  devise_for :users #, controllers: { :omniauth_callbacks => "omniauth_callbacks" }
 
   resources :users, only: [:show] do
     get 'followings', on: :member
     get 'followers', on: :member
+    get 'friends', on: :member
+    get 'bowels', on: :member
+    get 'health_events', on: :member
+    get 'share_posts', on: :member
   end
 
-  resources :share_posts
-  resources :health_events
-  resources :bowels
+  resources :share_posts, except: [:index]
+  resources :health_events, except: [:index]
+  resources :bowels, except: [:index]
   resources :relationships, only: [:create, :destroy]
 
   # The priority is based upon order of creation: first created -> highest priority.
