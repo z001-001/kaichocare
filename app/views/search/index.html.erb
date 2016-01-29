@@ -1,0 +1,22 @@
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <% if @feed_items %>
+      <h3>
+        検索結果 '<%= @q %>'
+      </h3>
+      <%= page_entries_info @feed_items, entry_name: "対象" %>
+      <ol class="feed_list">
+        <% @feed_items.each do |item| %>
+          <% if item.is_a?(Bowel) %>
+            <%= render partial: 'bowels/bowel', locals: { bowel: item } %>
+          <% elsif item.is_a?(HealthEvent) %>
+            <%= render partial: 'health_events/health_event', locals: { health_event: item } %>
+          <% elsif item.is_a?(SharePost) %>
+            <%= render partial: 'share_posts/share_post', locals: { share_post: item } %>
+          <% end %>
+        <% end %>
+      </ol>
+      <%= paginate @feed_items %>
+    <% end %>
+  </div>
+</div>
