@@ -3,6 +3,8 @@
   <span class="user"><%= link_to bowel.user.username, bowel.user %></span>
   <span class="title">
     <%= feeling_image_for(bowel) %>
+    <%= link_to Bowel.shape_name(bowel.shape), bowel_path(bowel),
+        class: "title-text" %>
     <%= stool_image_for(bowel) %>
     <%= stool_amount_for(bowel) %>
   </span>

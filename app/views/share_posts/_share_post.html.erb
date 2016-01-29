@@ -1,7 +1,10 @@
 <li id="share_post-<%= share_post.id %>">
   <%= link_to avatar_for(share_post.user, size: 50), share_post.user %>
   <span class="user"><%= link_to share_post.user.username, share_post.user %></span>
-  <span class="title"><%= share_post.title %></span>
+  <span class="title">
+      <%= link_to share_post.title, share_post_path(share_post),
+        class: "title-text" %>
+  </span>
   <!-- <span class="comment"><%= share_post.comment %></span> -->
   <span class="timestamp">
     <%= time_ago_in_words(share_post.created_at) %>前

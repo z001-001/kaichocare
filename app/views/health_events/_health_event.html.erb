@@ -3,7 +3,8 @@
   <span class="user"><%= link_to health_event.user.username, health_event.user %></span>
   <span class="title">
     <%= feeling_image_for(health_event) %>
-    <%= health_event.title %>
+    <%= link_to health_event.title, health_event_path(health_event),
+        class: "title-text" %>
   </span>
   <!-- <span class="comment"><%= health_event.comment %></span> -->
   <span class="timestamp">
